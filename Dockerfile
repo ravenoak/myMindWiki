@@ -1,0 +1,21 @@
+FROM python:3.9
+# ARG USER_ID=1000
+# ENV MINDWIKI_ADDR=0.0.0.0
+# ENV MINDWIKI_PORT=1312
+# ARG MINDWIKI_PORT
+
+RUN useradd -m -u 1000 -U mindwiki && \
+    apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y bash-completion pipenv plantuml && \
+    mkdir -p /usr/src/mindwiki /run/mindwiki /var/lib/mindwiki && \
+    chown -R mindwiki:mindwiki /usr/src/mindwiki /run/mindwiki /var/lib/mindwiki
+
+USER mindwiki
+
+COPY . /usr/src/mindwiki/
+
+WORKDIR /usr/src/mindwiki
+RUN pipenv install
+EXPOSE 1312
+CMD ["pipenv", "run", "python", "manage.py", "runserver", "0.0.0.0:1312"]

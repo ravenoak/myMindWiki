@@ -1,0 +1,12 @@
+version: "3"
+services:
+
+  mindwiki:
+    build: .
+    environment:
+      DATABASE_DIR: "/var/lib/mindwiki/"
+    ports:
+      - "1312:1312"
+    volumes:
+      - ./:/usr/src/mindwiki
+      - /tmp/mindwiki.py:/var/lib/mindwiki

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block metatags %}
+    <title>Home | MindWiki</title>
+    <meta name="description" content="A Wiki to organize your thoughts">
+    <meta property="og:title" content="MindWiki">
+    <meta property="og:site_name" content="GeeksForGeeks">
+    <meta property="og:url" content="http://localhost">
+    <meta property="og:description" content="A Wiki to organize your thoughts">
+    <meta property="og:type" content="website">
+{% endblock %}
+{% block content %}
+<header class="jumbotron">
+    <div class="container">
+        <p class="h1"> Welcome to <strong>MindWiki</strong></p>
+
+    </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mt-3 left">
+            {% if latest_page_list %}
+                {% for page in latest_page_list %}
+                    <div class="shadow-none card mb-4" id="newsfeed">
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="{% url 'wiki:detail' page.id %}">{{ page.title }}</a></h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No pages are available.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{%endblock%}
