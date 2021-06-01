@@ -9,4 +9,4 @@ services:
       - "1312:1312"
     volumes:
       - ./:/usr/src/mindwiki
-      - /tmp/mindwiki.py:/var/lib/mindwiki
+      - ~/.local/share/mindwiki:/var/lib/mindwiki

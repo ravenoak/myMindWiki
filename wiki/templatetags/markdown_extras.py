@@ -2,6 +2,7 @@ from django import template
 from django.template.defaultfilters import stringfilter
 
 import markdown as md
+from markdown.extensions.wikilinks import WikiLinkExtension
 from plantuml_markdown import PlantUMLMarkdownExtension
 
 register = template.Library()
@@ -14,5 +15,6 @@ def markdown(text):
                                          'fenced_code',
                                          'tables',
                                          'toc',
-                                         'wikilinks',
-                                         PlantUMLMarkdownExtension()])
+                                         PlantUMLMarkdownExtension(),
+                                         WikiLinkExtension(base_url='/wiki/'),
+                                         ])

@@ -5,6 +5,7 @@ class Page(models.Model):
     body = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(max_length=32)
     tags = models.ManyToManyField('Tag')
 
     def __str__(self):

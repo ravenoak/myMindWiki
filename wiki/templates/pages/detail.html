@@ -1,10 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
 {% load markdown_extras %}
-<h1>{{ page.title }}</h1>
-<div>{{ page.body | markdown | safe }}</div>
-<div>
-    <ul>
-    {% for tag in page.tags.all %}
-        <li>{{ tag.name }}</li>
-    {% endfor %}
-    </ul>
-</div>
+{% block metatags %}
+    <link href="/static/pages/css/codehilite-colorful.css" rel="stylesheet" />
+    <title>{{ page.title }} | MindWiki</title>
+    <meta name="description" content="A Wiki to organize your thoughts">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:site_name" content="MindWiki">
+    <meta property="og:url" content="http://localhost">
+    <meta property="og:description" content="A Wiki to organize your thoughts">
+    <meta property="og:type" content="website">
+{% endblock %}
+{% block content %}
+    <header class="jumbotron">
+        <div class="container">
+            <p class="h1"><strong>{{ page.title }}</strong></p>
+
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mt-3 left">
+                <div>{{ page.body | markdown | safe }}</div>
+                <div>
+                    Tags:
+                    <ul>
+                        {% for tag in page.tags.all %}
+                            <li>{{ tag.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
