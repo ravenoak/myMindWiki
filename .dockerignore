@@ -1,5 +1,8 @@
+.env*
 .git/
+.gitignore
 .idea/
 .python-version
 Dockerfile
 docker-compose.yml
+scripts/docker

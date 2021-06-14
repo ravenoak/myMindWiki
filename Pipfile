@@ -5,11 +5,14 @@ name = "pypi"
 
 [packages]
 Django = "*"
-django-environ = "*"
+django-environ-2 = "*"
+# django-markdownx = "*"
 markdown = "*"
+Pillow = "*"
 plantuml-markdown = "*"
 Pygments = "*"
 six = "*"
+wordcloud = "*"
 
 [dev-packages]
 ipython = "*"

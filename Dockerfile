@@ -11,10 +11,9 @@ RUN useradd -m -u 1000 -U mindwiki && \
     mkdir -p /usr/src/mindwiki /run/mindwiki /var/lib/mindwiki && \
     chown -R mindwiki:mindwiki /usr/src/mindwiki /run/mindwiki /var/lib/mindwiki
 
+COPY --chown=root:mindwiki . /usr/src/mindwiki/
+
 USER mindwiki
-
-COPY . /usr/src/mindwiki/
-
 WORKDIR /usr/src/mindwiki
 RUN pipenv install
 EXPOSE 1312

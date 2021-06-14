@@ -7,10 +7,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
             crossorigin="anonymous"></script>
-    <!-- will be replaced with meta content -->
     {% block metatags %}<title></title>{% endblock %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style>
+        body {
+            background-color: rgb(245, 247, 245);
+        }
+    </style>
 </head>
 <body>
 <div id="bodydiv">
@@ -19,16 +23,21 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'wiki:index' %}">
                     <img src="/static/icons/logo.svg" width="50" height="30" class="d-inline-block rounded align-top"
-                         alt="logo" loading="lazy" />
+                         alt="logo" loading="lazy"/>
                     MindWiki</a>
                 <div class="nav justify-content-end">
                     <div class="d-inline">
-                        <a class="nav-link text-black font-weight-bold" href="{% url 'wiki:index' %}">Pages</a>
+                        <a class="nav-link text-black font-weight-bold" href="{% url 'wiki:page-list' %}">Pages</a>
+                    </div>
+                    <div class="d-inline">
+                        <a class="nav-link text-black font-weight-bold" href="{% url 'wiki:search' %}">Search</a>
+                    </div>
+                    <div class="d-inline">
+                        <a class="nav-link text-black font-weight-bold" href="{% url 'admin:index' %}">Admin</a>
                     </div>
                 </div>
             </div>
         </nav>
-        <!-- will be replaced with post content -->
         {% block content %}
         {% endblock content %}
     </div>
@@ -36,15 +45,13 @@
         <div class="container"><h5 style="text-align:center;"></h5>
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
-
                     <p></p>
-
                     <div class="nav justify-content-center" id="navfooter">
                         <span><a class="nav-link text-black font-weight-bold"
                                  href="{% url 'wiki:index' %}">About</a></span>
-                        <span><a class="nav-link text-black font-weight-bold" href="{% url 'wiki:index' %}"></a></span>
                         <span><a class="nav-link text-black font-weight-bold"
-                                 href="{% url 'wiki:index' %}"></a></span>
+                                 href="https://github.com/ravenoak/mindwiki.py">GitHub</a></span>
+                        <span><a class="nav-link text-black font-weight-bold" href="{% url 'wiki:index' %}"></a></span>
                         <span><a class="nav-link text-black font-weight-bold" href="#"></a></span>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 {% load static %}
 {% load markdown_extras %}
 {% block metatags %}
-    <link href="/static/pages/css/codehilite-colorful.css" rel="stylesheet" />
+    <link href="/static/pages/css/codehilite-colorful.css" rel="stylesheet"/>
     <title>{{ page.title }} | MindWiki</title>
     <meta name="description" content="A Wiki to organize your thoughts">
     <meta property="og:title" content="{{ page.title }}">
@@ -14,8 +14,23 @@
 {% block content %}
     <header class="jumbotron">
         <div class="container">
-            <p class="h1"><strong>{{ page.title }}</strong></p>
-
+            <div class="row">
+                <div class="col left">
+                    <p class="h1"><strong>{{ page.title }}</strong></p>
+                </div>
+                <!-- <div class="col right">
+                    <span class="h4">
+                        <a class="nav-link text-black font-weight-bold"
+                           href="{% url 'wiki:page-edit' page.slug %}">edit</a>
+                    </span>
+                </div> -->
+                <div class="col right">
+                    <span class="h4">
+                        <a class="nav-link text-black font-weight-bold"
+                           href="{% url 'admin:wiki_page_change' page.pk %}">edit</a>
+                    </span>
+                </div>
+            </div>
         </div>
     </header>
     <div class="container">

@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Page(models.Model):
     title = models.CharField(max_length=64)
     body = models.TextField()
@@ -10,6 +11,11 @@ class Page(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('wiki:page-detail', kwargs={'slug': self.slug})
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=64)
