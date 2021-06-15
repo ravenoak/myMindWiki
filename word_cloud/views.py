@@ -10,7 +10,7 @@ def create_word_cloud(request):
     width = request.GET['width']
     height = request.GET['height']
     bg_color = tuple(int(request.GET['bg'][i:i + 2], 16) for i in (0, 2, 4))
-    words = request.GET['words'].replace(' ', '')
+    words = request.GET['words'].replace(' ', '').replace('-', '')
     cmap = request.GET['cmap']
 
     wc = WordCloud(width=int(width),

@@ -14,23 +14,16 @@
 {% block content %}
     <header class="jumbotron">
         <div class="container">
-            <div class="row">
-                <div class="col left">
+            <nav id="page-nav" class="navbar navbar-expand-lg shadow">
+                <div class="container-fluid">
                     <p class="h1"><strong>{{ page.title }}</strong></p>
                 </div>
-                <!-- <div class="col right">
-                    <span class="h4">
-                        <a class="nav-link text-black font-weight-bold"
-                           href="{% url 'wiki:page-edit' page.slug %}">edit</a>
-                    </span>
-                </div> -->
-                <div class="col right">
-                    <span class="h4">
-                        <a class="nav-link text-black font-weight-bold"
-                           href="{% url 'admin:wiki_page_change' page.pk %}">edit</a>
-                    </span>
+                <div class="nav justify-content-end">
+                    <div class="d-inline">
+                        <a class="nav-link text-black font-weight-bold" href="{% url 'admin:wiki_page_change' page.pk %}">edit</a>
+                    </div>
                 </div>
-            </div>
+            </nav>
         </div>
     </header>
     <div class="container">

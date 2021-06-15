@@ -24,6 +24,7 @@ admin.site.site_title = "MindWiki"
 admin.site.index_title = "MindWiki Administration"
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='/wiki/')),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico')),
     path('wiki/', include('wiki.urls')),
     path('wordcloud/', include('word_cloud.urls')),
