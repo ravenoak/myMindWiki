@@ -1,0 +1,23 @@
+version: "3"
+services:
+
+  mindwiki:
+    env_file:
+      - ./prod.env
+    environment:
+      DEBUG: "True"
+      DATA_DIR: "/var/lib/mindwiki/"
+      DATABASE_DIR: "/var/lib/mindwiki/db/"
+      MEDIA_DIR: "/var/lib/mindwiki/media/"
+    image: ravenoak/mindwiki.py:latest
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100M"
+        max-file: "10"
+    ports:
+      - "1312:1312"
+    volumes:
+      - ./backups:/var/lib/mindwiki/backups
+      - ./db:/var/lib/mindwiki/db
+      - ./media:/var/lib/mindwiki/media

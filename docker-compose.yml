@@ -1,22 +1,6 @@
 version: "3"
 services:
 
-  mindwiki:
-    build: .
-    env_file:
-      - ./.env.prod
-    environment:
-      DEBUG: "True"
-      DATA_DIR: "/var/lib/mindwiki/"
-      DATABASE_DIR: "/var/lib/mindwiki/db/"
-      MEDIA_DIR: "/var/lib/mindwiki/media/"
-      SECRET_KEY:
-    ports:
-      - "1312:1312"
-    volumes:
-      - ./:/tmp/mindwiki
-      - ~/.local/share/mindwiki:/var/lib/mindwiki
-
   mindwiki-dev:
     build: .
     environment:
@@ -24,7 +8,6 @@ services:
       DATA_DIR: "/var/lib/mindwiki/"
       DATABASE_DIR: "/var/lib/mindwiki/db/"
       MEDIA_DIR: "/var/lib/mindwiki/media/"
-      SECRET_KEY:
     ports:
       - "8080:1312"
     volumes:

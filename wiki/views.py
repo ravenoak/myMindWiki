@@ -20,7 +20,7 @@ class PageListView(generic.ListView):
     context_object_name = 'latest_page_list'
     model = Page
     ordering = '-date_created'
-    paginate_by = 20
+    paginate_by = 9
     template_name = 'pages/list.html'
 
 
@@ -31,7 +31,7 @@ class PageDetailView(generic.DetailView):
 
 class PageSearchView(generic.ListView):
     context_object_name = 'search_results'
-    paginate_by = 20
+    paginate_by = 9
     template_name = 'pages/search.html'
 
     def get_queryset(self):
