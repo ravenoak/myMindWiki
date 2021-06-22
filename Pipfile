@@ -11,6 +11,7 @@ markdown = "*"
 Pillow = "*"
 plantuml-markdown = "*"
 Pygments = "*"
+requests = "*"
 six = "*"
 wordcloud = "*"
 

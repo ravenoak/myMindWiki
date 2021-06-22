@@ -1,6 +1,10 @@
-from django.views import generic
+__all__ = ['PageCreateView', 'PageDetailView', 'PageListView',
+           'PageSearchView', 'PageUpdateView', 'WebLinkDetailView']
 
-from .models import Page
+from django.http import JsonResponse
+from django.views import generic, View
+
+from .models import Page, WebLink
 from .forms import PageForm
 
 
@@ -47,3 +51,18 @@ class PageSearchView(generic.ListView):
                 body__contains=contains) | query_set.filter(
                 title__contains=contains)
         return query_set
+
+
+class WebLinkDetailView(generic.DetailView):
+    model = WebLink
+
+    def get(self, request, *args, **kwargs):
+        json_requested = self.request.GET.get('json', False)
+        if json_requested and json_requested.lower() =='true':
+            weblink = self.get_object()
+            data = {
+                'description': weblink.description,
+                'url': weblink.url,
+            }
+            return JsonResponse({'data': data})
+        return super().get(request, *args, **kwargs)

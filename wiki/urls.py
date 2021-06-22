@@ -13,4 +13,7 @@ urlpatterns = [
          name='page-detail'),
     path('page/<slug:slug>/edit', views.PageUpdateView.as_view(),
          name='page-edit'),
+
+    path('weblink/<slug:slug>/', views.WebLinkDetailView.as_view(),
+         name='weblink-detail'),
 ]
