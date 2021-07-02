@@ -7,7 +7,7 @@ FROM python:3.9
 RUN useradd -m -u 1000 -U mindwiki && \
     apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y bash-completion pipenv plantuml && \
+    apt-get install -y bash-completion pipenv plantuml vim-nox && \
     mkdir -p /usr/src/mindwiki /run/mindwiki /var/lib/mindwiki && \
     chown -R mindwiki:mindwiki /usr/src/mindwiki /run/mindwiki /var/lib/mindwiki
 
@@ -15,6 +15,7 @@ COPY --chown=root:mindwiki . /usr/src/mindwiki/
 
 USER mindwiki
 WORKDIR /usr/src/mindwiki
-RUN pipenv install
+RUN pipenv install && echo 'export SHELL="/bin/bash"' >> /home/mindwiki/.bashrc && \
+    echo 'pipenv shell' >> /home/mindwiki/.bashrc
 EXPOSE 1312
 CMD ["pipenv", "run", "python", "manage.py", "runserver", "0.0.0.0:1312"]

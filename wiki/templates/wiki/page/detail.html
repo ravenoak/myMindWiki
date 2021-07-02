@@ -20,7 +20,8 @@
                 </div>
                 <div class="nav justify-content-end">
                     <div class="d-inline">
-                        <a class="nav-link text-black font-weight-bold" href="{% url 'admin:wiki_page_change' page.pk %}">edit</a>
+                        <a class="nav-link text-black font-weight-bold"
+                           href="{% url 'admin:wiki_page_change' page.pk %}">edit</a>
                     </div>
                 </div>
             </nav>
@@ -29,8 +30,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mt-3 left">
-                <div>{{ page.body | markdown | safe }}</div>
-                <div>
+                <div class="container-fluid">
+                    {{ page.body | markdown | safe }}
+                </div>
+                <div class="container-fluid">
                     Tags:
                     <ul>
                         {% for tag in page.tags.all %}

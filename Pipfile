@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 Django = "*"
 django-environ-2 = "*"
-# django-markdownx = "*"
 markdown = "*"
 Pillow = "*"
 plantuml-markdown = "*"
@@ -14,8 +13,6 @@ Pygments = "*"
 requests = "*"
 six = "*"
 wordcloud = "*"
-
-[dev-packages]
 ipython = "*"
 
 [requires]

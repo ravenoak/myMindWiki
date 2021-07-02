@@ -1,42 +1,40 @@
 __all__ = ['PageCreateView', 'PageDetailView', 'PageListView',
-           'PageSearchView', 'PageUpdateView', 'WebLinkDetailView']
+           'PageSearchView', 'PageUpdateView']
 
-from django.http import JsonResponse
-from django.views import generic, View
+from django.views import generic
 
-from .models import Page, WebLink
-from .forms import PageForm
+from wiki.forms import PageForm
+from wiki.models import Page
 
 
 class PageCreateView(generic.CreateView):
     model = Page
     form_class = PageForm
-    template_name = 'pages/edit.html'
+    template_name = 'wiki/page/edit.html'
 
 
 class PageUpdateView(generic.UpdateView):
     model = Page
     form_class = PageForm
-    template_name = 'pages/edit.html'
+    template_name = 'wiki/page/edit.html'
 
 
 class PageListView(generic.ListView):
-    context_object_name = 'latest_page_list'
     model = Page
     ordering = '-date_created'
     paginate_by = 9
-    template_name = 'pages/list.html'
+    template_name = 'wiki/page/list.html'
 
 
 class PageDetailView(generic.DetailView):
     model = Page
-    template_name = 'pages/detail.html'
+    template_name = 'wiki/page/detail.html'
 
 
 class PageSearchView(generic.ListView):
     context_object_name = 'search_results'
     paginate_by = 9
-    template_name = 'pages/search.html'
+    template_name = 'wiki/page/search.html'
 
     def get_queryset(self):
         contains = self.request.GET.get('contains', None)
@@ -51,18 +49,3 @@ class PageSearchView(generic.ListView):
                 body__contains=contains) | query_set.filter(
                 title__contains=contains)
         return query_set
-
-
-class WebLinkDetailView(generic.DetailView):
-    model = WebLink
-
-    def get(self, request, *args, **kwargs):
-        json_requested = self.request.GET.get('json', False)
-        if json_requested and json_requested.lower() =='true':
-            weblink = self.get_object()
-            data = {
-                'description': weblink.description,
-                'url': weblink.url,
-            }
-            return JsonResponse({'data': data})
-        return super().get(request, *args, **kwargs)

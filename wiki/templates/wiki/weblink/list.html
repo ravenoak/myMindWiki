@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block metatags %}
-    <title>Page List | MindWiki</title>
+    <title>WebLink List | MindWiki</title>
     <meta name="description" content="A Wiki to organize your thoughts">
-    <meta property="og:title" content="Page List">
+    <meta property="og:title" content="WebLink List">
     <meta property="og:site_name" content="MindWiki">
     <meta property="og:url" content="http://localhost">
     <meta property="og:description" content="A Wiki to organize your thoughts">
@@ -14,11 +14,12 @@
         <div class="container">
             <nav id="page-nav" class="navbar navbar-expand-lg shadow">
                 <div class="container-fluid">
-                    <p class="h1">Welcome to the <strong>MindWiki</strong></p>
+                    <p class="h1">Welcome to the <strong>MindWiki</strong>: WebLinks</p>
                 </div>
                 <div class="nav justify-content-end">
                     <div class="d-inline">
-                        <a class="nav-link text-black font-weight-bold" href="{% url 'admin:wiki_page_add' %}">add</a>
+                        <a class="nav-link text-black font-weight-bold"
+                           href="{% url 'admin:wiki_weblink_add' %}">add</a>
                     </div>
                 </div>
             </nav>
@@ -27,18 +28,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mt-3 left">
-                {% if latest_page_list %}
-                    {% for page in latest_page_list %}
+                {% if object_list %}
+                    {% for weblink in object_list %}
                         <div class="shadow-none card mb-4" id="newsfeed"
-                             style="background-image: url({% url 'word_cloud:create' %}?width=350&height=70&bg=F1F8E9&words={{ page.tags.all|join:'.'|urlencode }}&cmap=Set2); background-repeat: no-repeat; background-position: right; background-color: #F1F8E9;">
+                             style="background-image: url({% url 'word_cloud:create' %}?width=350&height=70&bg=F1F8E9&words={{ weblink.tags.all|join:'.'|urlencode }}&cmap=Set2); background-repeat: no-repeat; background-position: right; background-color: #F1F8E9;">
                             <div class="card-body">
-                                <h3 class="card-title"><a href="{% url 'wiki:page-detail' page.slug %}">{{ page.title }}</a>
+                                <h3 class="card-title"><a
+                                        href="{% url 'wiki:weblink-detail' weblink.slug %}">{{ weblink.slug }}</a>
                                 </h3>
+                                <p>{{ weblink.url }}</p>
                             </div>
                         </div>
                     {% endfor %}
                 {% else %}
-                    <p>No pages are available.</p>
+                    <div class="container-fluid">
+                        <p>No WebLinks are available. Why don't you <a href="{% url 'admin:wiki_weblink_add' %}">add
+                            one</a>.
+                        </p>
+                    </div>
                 {% endif %}
             </div>
         </div>

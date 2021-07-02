@@ -19,7 +19,8 @@
                 </div>
                 <div class="nav justify-content-end">
                     <div class="d-inline">
-                        <a class="nav-link text-black font-weight-bold" href="{% url 'admin:wiki_weblink_change' weblink.pk %}">edit</a>
+                        <a class="nav-link text-black font-weight-bold"
+                           href="{% url 'admin:wiki_weblink_change' weblink.pk %}">edit</a>
                     </div>
                 </div>
             </nav>
@@ -28,9 +29,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 mt-3 left">
-                <div>{{ weblink.description }}</div>
-                <div><a href="{{ weblink.url }}">{{ weblink.url }}</a></div>
-                <div>
+                <div class="container-fluid">
+                    {{ weblink.description | markdown | safe }}
+                </div>
+                <div class="container-fluid">
+                    <a href="{{ weblink.url }}">{{ weblink.url }}</a>
+                </div>
+                <div class="container-fluid">
                     Tags:
                     <ul>
                         {% for tag in weblink.tags.all %}

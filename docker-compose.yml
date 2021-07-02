@@ -6,8 +6,6 @@ services:
     environment:
       DEBUG: "True"
       DATA_DIR: "/var/lib/mindwiki/"
-      DATABASE_DIR: "/var/lib/mindwiki/db/"
-      MEDIA_DIR: "/var/lib/mindwiki/media/"
     ports:
       - "8080:1312"
     volumes:

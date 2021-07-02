@@ -14,7 +14,9 @@ from pathlib import Path
 import environ
 
 env = environ.Env(
-    DEBUG=(bool, False)
+    ALLOWED_HOSTS=(list, []),
+    DEBUG=(bool, False),
+    SECRET_KEY=(str,'DEV-ENV-ONLY'),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +29,8 @@ try:
     DATA_DIR = Path(env("DATA_DIR"))
     DATABASE_DIR = DATA_DIR / "db"
     MEDIA_DIR = DATA_DIR / "media"
-except:
+except Exception as e:
+    print(e)
     DATABASE_DIR = Path(env("DATABASE_DIR"))
     MEDIA_DIR = Path(env("MEDIA_DIR"))
 
@@ -40,7 +43,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 # Application definition
 
@@ -140,5 +143,4 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = Path(env("MEDIA_DIR"))
 MEDIA_URL = '/media/'

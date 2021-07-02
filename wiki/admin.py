@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import Page, Tag, WebLink
+from .models import Page, PageAdmin, Tag, TagAdmin, WebLink, WebLinkAdmin
 
-admin.site.register(Page)
-admin.site.register(Tag)
-admin.site.register(WebLink)
+admin.site.register(Page, PageAdmin)
+admin.site.register(Tag, TagAdmin)
+admin.site.register(WebLink, WebLinkAdmin)

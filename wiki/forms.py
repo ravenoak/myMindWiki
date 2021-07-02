@@ -1,6 +1,7 @@
 from django import forms
 from wiki.models import Page
 
+
 class PageForm(forms.ModelForm):
     class Meta:
         fields = '__all__'
