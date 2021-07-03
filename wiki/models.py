@@ -65,7 +65,7 @@ class WebLink(models.Model):
         return self.slug
 
     def __str__(self):
-        return self.slug
+        return self.url
 
     def get_absolute_url(self):
         from django.urls import reverse

@@ -34,7 +34,7 @@
                 {% if search_results %}
                     {% for tag in search_results %}
                         <div class="shadow-none card mb-4" id="newsfeed"
-                             style="background-image: url({% url 'word_cloud:create' %}?width=350&height=70&bg=F1F8E9&words={{ page.tags.all|join:'.'|urlencode }}&cmap=Set2); background-repeat: no-repeat; background-position: right; background-color: #F1F8E9;">
+                             style="background-image: url({% url 'word_cloud:create' %}?width=350&height=70&bg=F1F8E9&words={{ tag.slug|urlencode }}&cmap=Set2); background-repeat: no-repeat; background-position: right; background-color: #F1F8E9;">
                             <div class="card-body">
                                 <h3 class="card-title">
                                     <a href="{% url 'wiki:tag-detail' tag.slug %}">{{ tag.name }}</a>

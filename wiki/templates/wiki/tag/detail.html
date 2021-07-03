@@ -69,8 +69,9 @@
                              style="background-image: url({% url 'word_cloud:create' %}?width=350&height=70&bg=F1F8E9&words={{ weblink.tags.all|join:'.'|urlencode }}&cmap=Set2); background-repeat: no-repeat; background-position: right; background-color: #F1F8E9;">
                             <div class="card-body">
                                 <h3 class="card-title"><a
-                                        href="{% url 'wiki:weblink-detail' weblink.slug %}">{{ weblink.url }}</a>
+                                        href="{% url 'wiki:weblink-detail' weblink.slug %}">{{ weblink.slug }}</a>
                                 </h3>
+                                <p>{{ weblink.url }}</p>
                             </div>
                         </div>
                     {% endfor %}

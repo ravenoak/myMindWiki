@@ -1,31 +1,17 @@
 import argparse
+import hashlib
 import io
 import json
 import pathlib
 import re
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 from wiki.models import Tag, WebLink
 
 FAILED_FILE = 'bookmarks2weblinks-failed.json'
 OUTPUT_DIR = '/tmp/mindwiki'
 SLUG_CHARS = re.compile(r'[A-Za-z0-9_-]')
-
-
-def ensluginate(title: str) -> str:
-    slug = ''
-    space = True
-    for char in title:
-        if SLUG_CHARS.match(char) == None:
-            if char == ' ':
-                space = True
-            continue
-        if space and not char.isupper():
-            char = char.upper()
-        slug += char
-        space = False
-    return slug
 
 
 class Command(BaseCommand):
@@ -54,7 +40,11 @@ class Command(BaseCommand):
                 descr += f'\n{bm["tags"]}'
                 tags += bm['tags']
             tags = list(dict.fromkeys(tags))
-            slug = ensluginate(bm['title'])
+            hash = hashlib.md5()
+            hash.update(
+                bm['title'].encode('utf-8') + bm['path'].encode('utf-8') + bm[
+                    'uri'].encode('utf-8'))
+            slug = 'imported-' + hash.hexdigest()
             data = {'url': bm['uri'],
                     'tags': tags,
                     'description': descr,
@@ -63,22 +53,22 @@ class Command(BaseCommand):
             weblink = WebLink.objects.filter(url__exact=bm['uri']).first()
             if weblink is None:
                 weblink = WebLink(url=bm['uri'])
-            weblink.slug = slug
+                weblink.slug = slug
             weblink.description = descr
             try:
                 weblink.save()
                 for tag in tags:
+                    tag = tag.title()
                     t = Tag.objects.filter(name__exact=tag).first()
                     if t is None:
-                        t = Tag(name=tag)
+                        t = Tag(name=tag, slug=tag.replace(' ', ''))
                         t.save()
                     weblink.tags.add(t)
                 weblink.save()
             except Exception as e:
-                failed.append((bm, data))
-                self.stdout.write(self.style.ERROR(f'{e}'))
+                failed.append((data, bm))
+                self.stdout.write(self.style.ERROR(f'{e} --> {weblink}'))
         if len(failed) > 0:
-
             with open('/tmp/mindwiki/bookmarks2weblinks-failed.json',
                       'w') as f:
                 json.dump(failed, f)
