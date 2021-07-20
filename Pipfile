@@ -15,5 +15,8 @@ six = "*"
 wordcloud = "*"
 ipython = "*"
 
+[dev-packages]
+tox = "*"
+
 [requires]
 python_version = "3.9"

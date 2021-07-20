@@ -1,5 +1,5 @@
 """
-ASGI config for mindwiki project.
+ASGI config for mymindwiki project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mindwiki.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mymindwiki.settings')
 
 application = get_asgi_application()
