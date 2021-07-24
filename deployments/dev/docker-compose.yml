@@ -2,12 +2,15 @@ version: "3"
 services:
 
   mindwiki-dev:
-    build: .
+    build: ../..
     environment:
       DEBUG: "True"
       DATA_DIR: "/var/lib/mindwiki/"
     ports:
       - "8080:1312"
     volumes:
-      - ./:/usr/src/mindwiki
-      - /tmp/mindwiki:/var/lib/mindwiki
+      - ${PROJECT_DIR}:/usr/src/mindwiki
+      - mindwiki-dev-data:/var/lib/mindwiki
+
+volumes:
+  mindwiki-dev-data:

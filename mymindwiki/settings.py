@@ -48,7 +48,7 @@ ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 # Application definition
 
 INSTALLED_APPS = [
-    'wiki.apps.WikiConfig',
+    'mindwiki.apps.MindWikiConfig',
     'word_cloud.apps.WordCloudConfig',
     'django.contrib.admin',
     'django.contrib.auth',

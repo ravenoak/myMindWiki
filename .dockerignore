@@ -3,6 +3,6 @@
 .gitignore
 .idea/
 .python-version
+.tmp/
 Dockerfile
 docker-compose.yml
-scripts/docker

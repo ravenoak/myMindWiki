@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 Django = "*"
 django-environ-2 = "*"
+django-mindwiki = {editable = true, path = "./third_party/django-mindwiki"}
 markdown = "*"
 Pillow = "*"
 plantuml-markdown = "*"
