@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% load markdown_extras %}
+{% load markdown %}
 {% block metatags %}
     <title>{{ tag.name }} | Tag | MindWiki</title>
     <meta name="description" content="A Wiki to organize your thoughts">
@@ -40,7 +40,7 @@
                 <p class="h2"><strong>Pages</strong></p>
             </div>
             <div class="col-md-8 mt-3 left">
-                {% if tag.page_set.count > 0 %}
+                {% if tag.page_set.exists %}
                     {% for page in tag.page_set.all %}
                         <div class="shadow-none card mb-4" id="newsfeed"
                              style="background-image: url({% url 'word_cloud:create' %}?width=350&height=70&bg=F1F8E9&words={{ page.tags.all|join:'.'|urlencode }}&cmap=Set2); background-repeat: no-repeat; background-position: right; background-color: #F1F8E9;">
@@ -63,7 +63,7 @@
                 <p class="h2"><strong>Weblinks</strong></p>
             </div>
             <div class="col-md-8 mt-3 left">
-                {% if tag.weblink_set.count > 0 %}
+                {% if tag.weblink_set.exists %}
                     {% for weblink in tag.weblink_set.all %}
                         <div class="shadow-none card mb-4" id="newsfeed"
                              style="background-image: url({% url 'word_cloud:create' %}?width=350&height=70&bg=F1F8E9&words={{ weblink.tags.all|join:'.'|urlencode }}&cmap=Set2); background-repeat: no-repeat; background-position: right; background-color: #F1F8E9;">

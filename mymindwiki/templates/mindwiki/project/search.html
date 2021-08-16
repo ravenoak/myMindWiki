@@ -2,9 +2,9 @@
 {% load static %}
 {% load markdown %}
 {% block metatags %}
-    <title>Search | MindWiki</title>
+    <title>Project Search | MindWiki</title>
     <meta name="description" content="A Wiki to organize your thoughts">
-    <meta property="og:title" content="Search">
+    <meta property="og:title" content="Project Search">
     <meta property="og:site_name" content="MindWiki">
     <meta property="og:url" content="http://localhost">
     <meta property="og:description" content="A Wiki to organize your thoughts">
@@ -13,7 +13,7 @@
 {% block content %}
     <header class="jumbotron">
         <div class="container">
-            <p class="h1">Search the <strong>MindWiki</strong>: Pages</p>
+            <p class="h1">Search the <strong>MindWiki</strong>: Projects</p>
         </div>
     </header>
     <div class="container">
@@ -23,7 +23,8 @@
                     <label for="contains" class="form-label">Contains</label>
                     <input type="search" id="contains" name="contains">
                     <div id="containsHelpBlock" class="form-text">
-                        Performs a sub-string search on the <strong>body</strong> and <strong>title</strong> fields.
+                        Performs a sub-string search on the <strong>slug</strong> and <strong>description</strong>
+                        fields.
                     </div>
                 </div>
                 <div class="mb-3">
@@ -40,20 +41,23 @@
         <div class="row">
             <div class="col-md-8 mt-3 left">
                 {% if search_results %}
-                    {% for page in search_results %}
+                    {% for project in search_results %}
                         <div class="shadow-none card mb-4" id="newsfeed"
-                             style="background-image: url({% url 'word_cloud:create' %}?width=350&height=70&bg=F1F8E9&words={{ page.tags.all|join:'.'|urlencode }}&cmap=Set2); background-repeat: no-repeat; background-position: right; background-color: #F1F8E9;">
+                             style="background-image: url({% url 'word_cloud:create' %}?width=350&height=70&bg=F1F8E9&words={{ project.tags.all|join:'.'|urlencode }}&cmap=Set2); background-repeat: no-repeat; background-position: right; background-color: #F1F8E9;">
                             <div class="card-body">
                                 <h3 class="card-title">
-                                    <a href="{% url 'mindwiki:page-detail' page.slug %}">{{ page.title }}</a>
+                                    <a href="{% url 'mindwiki:project-detail' project.slug %}"
+                                       style="background-color: #F1F8E9;">{{ project.slug }}</a>
                                 </h3>
+                                <p>{{ project.url }}</p>
                             </div>
                         </div>
                     {% endfor %}
                 {% else %}
                     <div class="container-fluid">
                         <p>
-                            No pages are available. Why don't you <a href="{% url 'admin:mindwiki_page_add' %}">add one</a>.
+                            No Projects are available. Why don't you <a href="{% url 'admin:mindwiki_project_add' %}">
+                            add one</a>.
                         </p>
                     </div>
                 {% endif %}
