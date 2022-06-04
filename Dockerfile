@@ -8,7 +8,7 @@ ARG MINDWIKI_RUN_DIR=/run/mindwiki
 ARG MINDWIKI_DATA_DIR=/var/lib/mindwiki
 
 
-FROM python:${IMAGE_TAG} as MWBASE
+FROM python:${IMAGE_TAG} as mwbase
 
 ARG USER_ID
 ARG USER_NAME
@@ -20,7 +20,7 @@ ARG MINDWIKI_DATA_DIR
 RUN useradd -m -s /bin/bash -u ${USER_ID} -U ${USER_NAME} && \
     apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y bash-completion pipenv plantuml vim-nox ${EXTRA_PACKAGES} && \
+    apt-get install -y plantuml sqlite3 vim-nox ${EXTRA_PACKAGES} && \
     mkdir -p ${MINDWIKI_SRC_DIR} ${MINDWIKI_RUN_DIR} ${MINDWIKI_DATA_DIR} && \
     chown -R ${USER_NAME}:${USER_NAME} ${MINDWIKI_SRC_DIR} ${MINDWIKI_RUN_DIR} ${MINDWIKI_DATA_DIR}
 
@@ -28,13 +28,14 @@ COPY --chown=${USER_NAME}:${USER_NAME} . ${MINDWIKI_SRC_DIR}/
 RUN install ${MINDWIKI_SRC_DIR}/assets/entrypoint.sh /usr/local/bin/
 
 
-FROM MWBASE
+FROM mwbase
 ARG USER_NAME
 ARG MINDWIKI_SRC_DIR
 
 USER ${USER_NAME}
 WORKDIR ${MINDWIKI_SRC_DIR}
-RUN pipenv install -d && \
+RUN pip install --user pipenv && \
+    /home/mindwiki/.local/bin/pipenv -v install -d && \
     echo 'export SHELL="/bin/bash"' >> ${HOME}/.bashrc && \
     echo '#pipenv shell' >> ${HOME}/.bashrc
 EXPOSE 1312

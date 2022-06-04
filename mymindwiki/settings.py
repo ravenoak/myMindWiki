@@ -10,11 +10,18 @@ from django.core.exceptions import ImproperlyConfigured
 import environ
 
 env = environ.Env(
+    #
     ALLOWED_HOSTS=(list, []),
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG=(bool, False),
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY=(str, 'DEV-ENV-ONLY'),
+    #
+    SITE_HOSTNAME=(str, 'localhost'),
+    #
+    SITE_PORT=(int, 1312),
+    #
+    SSL_ENABLED=(bool, False),
 )
 
 logger = logging.getLogger(__name__)
@@ -28,13 +35,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 try:
     DATA_DIR = Path(env("DATA_DIR"))
     DATABASE_DIR = DATA_DIR / "db"
-    MEDIA_DIR = DATA_DIR / "media"
+    MEDIA_ROOT = DATA_DIR / "media"
 except Exception as e:
     logger.debug(
         "Environment variable 'DATA_DIR' not set, looking for 'DATABASE_DIR' "
         "and 'MEDIA_DIR' instead.")
     DATABASE_DIR = Path(env("DATABASE_DIR"))
-    MEDIA_DIR = Path(env("MEDIA_DIR"))
+    MEDIA_ROOT = Path(env("MEDIA_DIR"))
 
 DEBUG = env('DEBUG')
 SECRET_KEY = env("SECRET_KEY")
@@ -150,3 +157,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
+
+SITE_HOSTNAME = env('SITE_HOSTNAME')
+SITE_PORT = env('SITE_PORT')
+SSL_ENABLED = env('SSL_ENABLED')

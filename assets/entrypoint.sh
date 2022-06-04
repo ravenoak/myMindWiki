@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+PIPENV=/home/mindwiki/.local/bin/pipenv
+
 if [ -n "${DATA_DIR}" ] && [ -d ${DATA_DIR} ]; then
   if [ ! -d ${DATA_DIR}/db ]; then
     mkdir ${DATA_DIR}/db
@@ -9,4 +11,4 @@ if [ -n "${DATA_DIR}" ] && [ -d ${DATA_DIR} ]; then
   fi
 fi
 
-exec pipenv run python manage.py runserver 0.0.0.0:1312
+exec ${PIPENV} run python manage.py runserver 0.0.0.0:1312

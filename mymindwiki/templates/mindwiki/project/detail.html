@@ -29,12 +29,15 @@
     </header>
     <div class="container">
         <div class="row">
+            <p>{{ project.status_line }}</p>
+        </div>
+        <div class="row">
             <div class="col-md-8 mt-3 left">
                 <div class="container-fluid">
                     {{ project.description | markdown | safe }}
                 </div>
                 <div class="container-fluid">
-                    <a href="{{ project.url }}">{{ project.url }}</a>
+                    {{ project.body | markdown | safe }}
                 </div>
                 <div class="container-fluid">
                     Pages:
