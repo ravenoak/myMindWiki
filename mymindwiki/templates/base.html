@@ -23,6 +23,7 @@
         .mw-pj-st-b {
             background-color: rgb(224, 92, 32);
         }
+
         .mw-pj-st-c {
             background-color: rgb(84, 62, 41);
         }
@@ -31,7 +32,7 @@
 <body>
 <div id="bodydiv">
     <div id="nofooter">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow" id="topnav">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow" id="topnav" aria-label="">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'mindwiki:index' %}">
                     <img src="/static/icons/logo.svg" width="50" height="30" class="d-inline-block rounded align-top"
@@ -49,6 +50,9 @@
                                 Browse
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarBrowseDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'mindwiki:category-index' %}">Categories</a>
+                                </li>
                                 <li><a class="dropdown-item" href="{% url 'mindwiki:file-index' %}">Files</a></li>
                                 <li><a class="dropdown-item" href="{% url 'mindwiki:image-index' %}">Images</a></li>
                                 <li><a class="dropdown-item" href="{% url 'mindwiki:page-index' %}">Pages</a></li>
@@ -64,6 +68,9 @@
                                 Search
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarSearchDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'mindwiki:category-search' %}">Categories</a>
+                                </li>
                                 <li><a class="dropdown-item" href="{% url 'mindwiki:file-search' %}">Files</a></li>
                                 <li><a class="dropdown-item" href="{% url 'mindwiki:image-search' %}">Images</a></li>
                                 <li><a class="dropdown-item" href="{% url 'mindwiki:page-search' %}">Pages</a></li>
@@ -89,7 +96,7 @@
     </div>
     <footer class="footer" id="foot">
         <div class="container"><h5 style="text-align:center;"></h5>
-            <nav class="navbar navbar-expand-lg">
+            <nav class="navbar navbar-expand-lg" aria-label="">
                 <div class="container-fluid">
                     <p></p>
                     <div class="nav justify-content-center" id="navfooter">

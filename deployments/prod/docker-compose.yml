@@ -9,7 +9,7 @@ services:
       DATA_DIR: "/var/lib/mindwiki/"
       DATABASE_DIR: "/var/lib/mindwiki/db/"
       MEDIA_DIR: "/var/lib/mindwiki/media/"
-    image: ravenoak/mindwiki.py:latest
+    image: ravenoak/mymindwiki:latest
     logging:
       driver: "json-file"
       options:

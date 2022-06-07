@@ -37,6 +37,7 @@ WORKDIR ${MINDWIKI_SRC_DIR}
 RUN pip install --user pipenv && \
     /home/mindwiki/.local/bin/pipenv -v install -d && \
     echo 'export SHELL="/bin/bash"' >> ${HOME}/.bashrc && \
-    echo '#pipenv shell' >> ${HOME}/.bashrc
+    echo 'export PATH="${HOME}/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"' >> ${HOME}/.bashrc && \
+    echo 'pipenv shell' >> ${HOME}/.bashrc
 EXPOSE 1312
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
