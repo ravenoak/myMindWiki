@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load markdown %}
 {% load project %}
 {% block metatags %}
     <title>{{ project.slug }} | Project | MindWiki</title>
@@ -16,7 +15,7 @@
         <div class="container">
             <nav id="page-nav" class="navbar navbar-expand-lg shadow">
                 <div class="container-fluid">
-                    <p class="h1"><strong>Project: {{ project.name }}</strong> {% project_status project %}</p>
+                    <p class="h1"><strong>Project: {{ project.title }}</strong> {% project_status project %}</p>
                 </div>
                 <div class="nav justify-content-end">
                     <div class="d-inline">
@@ -34,10 +33,10 @@
         <div class="row">
             <div class="col-md-8 mt-3 left">
                 <div class="container-fluid">
-                    {{ project.description | markdown | safe }}
+                    {{ project.description | safe }}
                 </div>
                 <div class="container-fluid">
-                    {{ project.body | markdown | safe }}
+                    {{ project.body | safe }}
                 </div>
                 <div class="container-fluid">
                     Pages:
@@ -51,7 +50,7 @@
                     Tags:
                     <ul>
                         {% for tag in project.tags.all %}
-                            <li>{{ tag.name }}</li>
+                            <li><a href="{% url 'mindwiki:tag-detail' tag.slug %}">{{ tag.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>

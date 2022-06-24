@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load markdown %}
 {% block metatags %}
     <title>Add New Page | MindWiki</title>
     <meta name="description" content="A Wiki to organize your thoughts">
@@ -9,7 +8,6 @@
     <meta property="og:url" content="http://localhost">
     <meta property="og:description" content="A Wiki to organize your thoughts">
     <meta property="og:type" content="website">
-    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script> -->
 {% endblock %}
 {% block content %}
     <header class="jumbotron">
@@ -61,16 +59,6 @@
                     {% if page %}Update Page{% else %}Add New Page{% endif %}
                 </button>
             </form>
-            <!-- <script>
-                ClassicEditor
-                    .create(document.querySelector('#editor'), {
-                        plugins: [
-                            Markdown,
-                        ]})
-                    .catch(error => {
-                        console.error(error);
-                    });
-            </script> -->
         </div>
     </div>
 {% endblock %}
