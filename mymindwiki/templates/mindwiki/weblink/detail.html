@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-{% load markdown %}
 {% block metatags %}
     <title>{{ weblink.slug }} | Weblink | MindWiki</title>
     <meta name="description" content="A Wiki to organize your thoughts">
@@ -30,7 +29,7 @@
         <div class="row">
             <div class="col-md-8 mt-3 left">
                 <div class="container-fluid">
-                    {{ weblink.description | markdown | safe }}
+                    {{ weblink.description | safe }}
                 </div>
                 <div class="container-fluid">
                     <a href="{{ weblink.url }}">{{ weblink.url }}</a>
