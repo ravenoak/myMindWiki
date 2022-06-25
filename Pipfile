@@ -15,6 +15,7 @@ six = "*"
 wordcloud = "*"
 ipython = "*"
 django-markdownx = {git = "https://github.com/neutronX/django-markdownx"}
+mdx-gh-links = "*"
 
 [dev-packages]
 ipython = "*"

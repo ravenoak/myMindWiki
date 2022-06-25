@@ -116,6 +116,7 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'wikilinks',
     'mindwiki.markdown_ext.ext_links',
     'mindwiki.markdown_ext.snippets',
+    'mdx_gh_links',
 ]
 MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
     'wikilinks': {
@@ -192,5 +193,3 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-
-
