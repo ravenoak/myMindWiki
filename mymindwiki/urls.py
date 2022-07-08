@@ -18,6 +18,7 @@ urlpatterns = [
     path('wordcloud/', include('word_cloud.urls')),
     path('admin/', admin.site.urls),
     path('markdownx/', include('markdownx.urls')),
+    path("select2/", include("django_select2.urls")),
 ]
 
 if settings.DEBUG:

@@ -5,22 +5,29 @@ name = "pypi"
 
 [packages]
 Django = "*"
-django-environ-2 = "*"
-django-mindwiki = {editable = true, path = "./third_party/django-mindwiki"}
 Pillow = "*"
-plantuml-markdown = "*"
 Pygments = "*"
+crispy-bootstrap5 = "*"
+django-crispy-forms = {git = "https://github.com/django-crispy-forms/django-crispy-forms"}
+django-environ-2 = "*"
+django-markdownx = {git = "https://github.com/neutronX/django-markdownx"}
+django-mindwiki = {editable = true, path = "./third_party/django-mindwiki"}
+django-select2 = "*"
+djangorestframework = "*"
+ipython = "*"
+mdx-gh-links = "*"
+plantuml-markdown = "*"
 requests = "*"
 six = "*"
 wordcloud = "*"
-ipython = "*"
-django-markdownx = {git = "https://github.com/neutronX/django-markdownx"}
-mdx-gh-links = "*"
+channels = "*"
 
 [dev-packages]
+coverage = "*"
 ipython = "*"
 tox = "*"
-coverage = "*"
+nodeenv = "*"
+black = "*"
 
 [requires]
 python_version = "3.9"

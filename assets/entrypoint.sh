@@ -11,4 +11,5 @@ if [ -n "${DATA_DIR}" ] && [ -d ${DATA_DIR} ]; then
   fi
 fi
 
+source .env
 exec ${PIPENV} run python manage.py runserver 0.0.0.0:1312

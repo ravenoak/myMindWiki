@@ -67,15 +67,20 @@ EXTERNAL_URL = f"{XPORT}{SITE_HOSTNAME}:{SITE_PORT}"
 # Application definition
 
 INSTALLED_APPS = [
-    'mindwiki.apps.MindWikiConfig',
-    'word_cloud.apps.WordCloudConfig',
+    'channels',
+    'crispy_bootstrap5',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'django_select2',
     'markdownx',
+    'mindwiki.apps.MindWikiConfig',
+    'rest_framework',
+    'word_cloud.apps.WordCloudConfig',
 ]
 
 MIDDLEWARE = [
@@ -111,17 +116,14 @@ TEMPLATES = [
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'codehilite',
     'fenced_code',
+    'mdx_gh_links',
+    'mindwiki.markdown_ext.ext_links',
+    'mindwiki.markdown_ext.snippets',
     'tables',
     'toc',
     'wikilinks',
-    'mindwiki.markdown_ext.ext_links',
-    'mindwiki.markdown_ext.snippets',
-    'mdx_gh_links',
 ]
 MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
-    'wikilinks': {
-        'base_url': '/wiki/page/'
-    },
     'mindwiki.markdown_ext.ext_links': {
         'base_url': EXTERNAL_URL + '/wiki/weblink/',
         'end_url': '/?json=true',
@@ -129,6 +131,9 @@ MARKDOWNX_MARKDOWN_EXTENSION_CONFIGS = {
     'mindwiki.markdown_ext.snippets': {
         'base_url': EXTERNAL_URL + '/wiki/snippet/',
         'end_url': '/?json=true',
+    },
+    'wikilinks': {
+        'base_url': '/wiki/page/'
     },
 }
 
@@ -143,6 +148,11 @@ DATABASES = {
         'NAME': DATABASE_DIR / 'db.sqlite3',
     }
 }
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -187,9 +197,21 @@ STATICFILES_DIRS = [
     BASE_DIR / "mymindwiki" / "static",
 ]
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 MEDIA_URL = '/media/'
+
+# Crispy forms
+# https://github.com/django-crispy-forms/crispy-bootstrap5
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+# REST Framework
+# https://www.django-rest-framework.org/api-guide/settings/
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly', ],
+    'PAGE_SIZE': 10
+}
